@@ -1,0 +1,12 @@
+author: Turki S. <nilputs@gmail.com>
+License: WTFPL
+
+Dependencies:
+  SDL2
+  OpenGL >= 3.30
+
+  pkg-config
+
+Usage:
+    make
+    ./whatever_demo
