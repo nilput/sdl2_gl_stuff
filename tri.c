@@ -5,12 +5,13 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "check_gl.h"
+#include "checks.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
 char keys[256] = {0};
+static void check_sdl(const char *line);
 
 struct state_s {
     char running;
@@ -299,9 +300,10 @@ static void initialize(){
     
 }
 
-static void shader_die(GLuint shd, const char *msg)
-{
-    char log[1024];
-    glGetShaderInfoLog(shd, sizeof log, NULL, log);
-    die("%s shader compilation failed\n%s", msg, log);
+static void check_sdl(const char *line){
+   const char *m = SDL_GetError(); 
+   if (m){
+        printf( "SDL LAST ERROR: %s\n"
+                "at %s\n", m, line);
+   }
 }

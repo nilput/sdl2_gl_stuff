@@ -1,9 +1,15 @@
 #ifndef COMMOH
 #define COMMOH
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-static void die(char *msg, ...){
+
+static void die(const char *msg, ...){
     
     va_list va;
     va_start(va, msg);
@@ -22,7 +28,7 @@ static void dlogf(char *msg, ...){
     va_end(va);
 }
 
-const char *lfcat(const char *f, int l){
+static const char *lfcat(const char *f, int l){
     static char buff[1024];
     snprintf(buff, 1024-1, "%s:%d", f, l);
     return buff;
@@ -30,13 +36,5 @@ const char *lfcat(const char *f, int l){
 
 #define LINEFILESTR lfcat(__FILE__, __LINE__)
 
-void check_sdl(const char *line){
-   const char *m = SDL_GetError(); 
-   if (m){
-        printf( "SDL LAST ERROR: %s\n"
-                "at %s\n", m, line);
-   }
-
-}
 
 #endif
